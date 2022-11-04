@@ -44,20 +44,18 @@ function onImgClickOpen(event) {
   const instance = basicLightbox.create(
     `<img src="${originalUrl}" width="600" height="400">`, {
       onShow: (instance) => {
-        document.addEventListener('keydown', (event) => {
-          if (event.code === 'Escape') {
-            instance.close();
-          }
-        })
+        document.addEventListener('keydown', onEscPressClose);
       },
       onClose: (instance) => {
-        document.removeEventListener('keydown', (event) => {
-          if (event.code === 'Escape') {
-            instance.close();
-          }
-        })
+        document.removeEventListener('keydown', onEscPressClose);
       }
     });
 
   instance.show();
+
+  function onEscPressClose(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  }
 };
