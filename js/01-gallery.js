@@ -43,10 +43,10 @@ function onImgClickOpen(event) {
 
   const instance = basicLightbox.create(
     `<img src="${originalUrl}" width="600" height="400">`, {
-      onShow: (instance) => {
+      onShow: () => {
         document.addEventListener('keydown', onEscPressClose);
       },
-      onClose: (instance) => {
+      onClose: () => {
         document.removeEventListener('keydown', onEscPressClose);
       }
     });
