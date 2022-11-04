@@ -42,13 +42,22 @@ function onImgClickOpen(event) {
   const originalUrl = event.target.dataset.source;
 
   const instance = basicLightbox.create(
-    `<img src="${originalUrl}" width="600" height="400">`);
+    `<img src="${originalUrl}" width="600" height="400">`, {
+      onShow: (instance) => {
+        document.addEventListener('keydown', (event) => {
+          if (event.code === 'Escape') {
+            instance.close();
+          }
+        })
+      },
+      onClose: (instance) => {
+        document.removeEventListener('keydown', (event) => {
+          if (event.code === 'Escape') {
+            instance.close();
+          }
+        })
+      }
+    });
 
   instance.show();
-
-  window.addEventListener('keydown', (event) => {
-    if (event.code === 'Escape') {
-      instance.close();
-    }
-  })
 };
